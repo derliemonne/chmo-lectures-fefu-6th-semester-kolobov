@@ -1,5 +1,6 @@
 #set text(lang: "ru", size: 14pt)
 #set par(justify: true)
+#set heading(numbering: "1.")
 #import "@preview/mannot:0.2.2": *
 #import "./utils.typ"
 
@@ -97,7 +98,7 @@ $ y^* := y(x) + h f(x, y) $
 
 == рунге-кутта
 
-$ alpha_2, alpha_3, dots, alpha_q, p_1, p_2, dots, p_q wide b_(i j) wide 0 < j < i <= q $
+$ alpha_2, alpha_3, dots, alpha_q, p_1, p_2, dots, p_q wide beta_(i j) wide 0 < j < i <= q $
 
 предположим, что мы знаем все эти константы.
 
@@ -111,7 +112,7 @@ $ k_q (h) = h f (x+alpha_q h, y + beta_(q 1) k_1 (h) + dots + beta_(q, q-1) k_(q
 
 $ y(x + h) approx y(x) + sum_(i=1)^q  p_i k_i (h) = z(h) $
 
-$ y(x + h) = z(h) $
+$ y(x + h) approx z(h) $
 
 погрешность:
 
@@ -175,7 +176,7 @@ $ O(h^q) $
 
 #align(right)[`2025-03-04`]
 
-= метод конечных разностей
+== метод конечных разностей
 
 $ cases(
     L u(x) = f(x) comma space x in G,
@@ -190,7 +191,7 @@ $
 
 $ overline(omega) = {x_k = h k, k = 0, 1, dots, N; h dot N = 1} $
 
-$ Delta_h $
+$ Delta h $
 
 $ y_h (x_k), space x_k in overline(omega)_h $
 
@@ -308,7 +309,7 @@ $ (u(x+h) - u(x))/h = u'(x) + O(h) "разность вперёд" $
 
 $ (u(x) - u(x - h))/h = u'(x) + O(h) "разность назад" $
 
-$ (u(x+h) - u(x-h))/(2h)) = u'(x) + O(h^2) "центральная разность" $
+$ (u(x+h) - u(x-h))/(2h) = u'(x) + O(h^2) "центральная разность" $
 
 как это доказать?
 
@@ -326,7 +327,7 @@ $ sigma (u(x+h) - u(x))/h + (1 - sigma) (u(x+2h) - u(x+h))/h = u'(x) + h/2(3-2 s
 
 $ (4 u(x+h) - 3 u(x) - u(x+2 h))/(2h) $
 
-$ (3 u(x) - 4u(x-h) + u(x-2h))/(2h) $
+// $ (3 u(x) - 4u(x-h) + u(x-2h))/(2h) $
 
 \
 
@@ -342,7 +343,7 @@ $ x_i in overline(omega)_h $
 
 разностная схема:
 
-$ (y_(i+1) - 2y_i + y_(i-1))/h^2 + p_i (y_(i+1)-y(i-1))/(2h) + q_i u_i = f_i, quad i = 1, dots, N-1 $
+$ (y_(i+1) - 2y_i + y_(i-1))/h^2 + p_i (y_(i+1)-y_(i-1))/(2h) + q_i u_i = f_i, quad i = 1, dots, N-1 $
 
 эта схема точности $O(h^2)$. теперь добавляем граничные условия, тоже их аппроксимируем:
 
@@ -360,7 +361,7 @@ $ alpha_2 y_N + beta_2 (dots.c) = gamma_2 $
 
 #align(right)[`2025-03-11`]
 
-= распространение волны
+== распространение волны
 
 три типа уравнений:
 
@@ -408,7 +409,7 @@ $ u_i^0 = phi(x_i) $
 
 напишем ещё одну схему для того же уравнения (то же самое, но по времени $j+1$):
 
-$ (u_i^(j+1) - u_i^j) / tau a (u_(i+1)^mark(j+1) - 2 u_i^mark(j+1) + u_(i-1)^mark(j+1))/h^2 $
+$ (u_i^(j+1) - u_i^j) / tau = a (u_(i+1)^mark(j+1) - 2 u_i^mark(j+1) + u_(i-1)^mark(j+1))/h^2 $
 
 тут на $j$-м слое одна точка, а на $(j+1)$-м аж три! это неявная схема. придётся решать СЛАУ. можно юзать метод монотонной прогонки.
 
@@ -484,7 +485,7 @@ $ max_(1<=i<=N-1) abs(u_i^(j+1)) <= max_(1<=i<=N-1) abs(u_i^j) $
 
 а давайте теперь запишем неявную схему:
 
-$ lambda u_(i-1)^(j+1) - (1 + 2lambda) u_i^(j+1) + lambda u_(i-1)^(j-1) = -u_i^j, space i=1, 2, dots, N-1 $
+$ lambda u_(i-1)^(j+1) - (1 + 2lambda) u_i^(j+1) + lambda u_(i-1)^(j+1) = -u_i^j, space i=1, 2, dots, N-1 $
 
 нужно решать слау методом прогонки.
 
@@ -498,7 +499,7 @@ $ abs(1 + 2 lambda) > abs(lambda) + abs(lambda) $
 
 #align(right)[`2025-03-18`]
 
-= волновое уравнение
+== волновое уравнение
 
 $ (diff^2 U)/(diff t^2) = a^2 (diff^2 U)/(diff x^2) $
 
@@ -546,7 +547,7 @@ $ lambda u_(i-1)^(j+1) - (1 + 2 lambda) u_i^(j+1) + lambda_(i+1)^(j+1) = (1 + 2 
 
 $ u_0^j - u_N^j = 0 $
 
-= уравнение теплопроводности
+== уравнение теплопроводности
 
 $ (diff U)/(diff t) = (diff^2 U)/(diff x^2) + (diff^2 U)/(diff y^2) $
 
@@ -576,7 +577,7 @@ $ lambda_1 (u_(i-1, j)^(k+1) + u_(i+1,j)^(k+1)) - (1+2lambda_1 + 2lambda_2) u_(i
 
 тут будет матричная прогонка.
 
-= уравнение лапласа (эллиптическое)
+== уравнение лапласа (эллиптическое)
 
 $ (diff^2 U)/(diff x^2) + (diff^2 U)/(diff y^2) = 0 $
 
@@ -618,3 +619,158 @@ $ U stretch(->)_(t -> oo) V $
 ```
 на этом первая часть окончена. можно сдавать коллок!
 ```
+
+#align(right)[`2025-03-25`]
+
+= вторая часть
+
+рассмотри функци#emph[анал]:
+
+$ J_1 (u) = integral_a^b pi(x, u, u') dif x $
+
+$ u = u(x) $
+
+имеет первую непрерывную производную. граничные условия:
+
+$ u(a) = u_a wide u(b) = u_b $
+
+$u_1$ находится в $epsilon$-окрестности функции:
+
+$ abs(u_1 (x) - u(x)) <= epsilon $
+
+среди функций, лежащих в $epsilon$-окрестности, имеющих непрерывную производную и удовлетворяющих граничным условиям, найти функцию, доставляющую экстремум функционалу $J_1$.
+
+введём ещё функцию $eta: eta (a) = eta(b) = 0$.
+
+$ u_alpha (x) = u(x) + alpha eta (x) $
+
+параметр $alpha$ мал, чтобы $u_alpha$ тоже попадала в окрестность.
+
+подставим:
+
+$ J_1 (u_alpha) = integral_a^b pi(x, u+ alpha eta, u' + alpha eta') dif x  $
+
+посмотрим это как на функцию от $alpha$:
+
+$ J_1 (u_alpha) := Phi(alpha) $
+
+первая вариация функционала:
+
+$ diff J_1 (u) = (diff Phi) / (diff alpha) "при" alpha = 0 $
+
+вторая вариация функционала:
+
+$ diff^2 J_1 (u) = (diff^2 Phi)/(diff alpha^2) "при" alpha =0 $
+
+$ diff J_1 (u) = integral_a^b (pi_u eta + pi_(u') eta') dif x $
+
+$ integral_a^b pi_(u') eta' dif x = pi_(u') eta |_a^b - integral_a^b (dif)/(dif x) (pi_u') eta (x) dif x $ 
+
+$ diff J_1 (u) = integral_a^b eta (x) (pi_u - dif/(dif x) (pi_u')) dif x = 0 $
+
+уравнение эйлера:
+
+$ pi_u - dif / (dif x) (pi_u') = 0 $
+
+
+$ pi = ((diff u)/(diff x))^2 + k u^2 - 2 f u $
+
+$ k(x), f(x), k > 0 $
+
+уравнение эйлера для вон того функционала:
+
+$ - (dif^2 u)/(dif x^2) + k u = f(x) $
+
+\
+
+$ L u = f, wide u in Phi(L) $
+
+$ Phi(L)-$ всюду плотное множество. то есть его замыкание совпадает с ним самим.
+
+$ J_1 (u) = min_(v in Phi (L)) J_1 (v) $
+
+$ J_1(u) = (L u, u) - 2 (f, u) $
+
+$L$ --- линейный, самосопряжённый, положительный:
+
+самосопряжённый:
+
+$ (L u, v) = (u, L v) $
+
+положительный:
+
+$ (L u, u) > 0 $
+
+если решение задачи существует, то оно доставляет минимум.
+
+$ L u_0 = f wide u_alpha = u_0 + alpha eta $
+
+$ eta in Phi(L) $
+
+$ J_1 (v_alpha) = (L (u_0 + alpha eta), u_0 + alpha eta) - 2f, u_0 + alpha eta) =\
+= L(u_0, u_0) + 2 alpha (L u_0, eta) + alpha^2 (L eta, eta) - 2(f, u_0) - 2 alpha (f, eta) = \
+= J_1 (u_0) + 2alpha(L u_0 - f_1 eta) + alpha^2 (L eta, eta) $
+
+- $ 2alpha(L u_0 - f_1 eta) = 0$
+
+- $ (L eta, eta) > 0$
+
+$ J_1 (v_alpha) > J(u_0) $
+
+доказано. теперь в другую сторону докажем:
+
+$u_0$ --- элемент, который доставляет минимум.
+
+$ J_1 (v_alpha) >= J_1 (u_0)  $
+
+$ v_alpha = u_0 + alpha eta $
+
+$ J_1 (v_alpha) = J_1 (u_0) + 2 alpha (L u_0 - f, eta) + alpha^2 (L eta, eta) $
+
+$ 2 alpha (L u_0 - f, eta) + alpha^2 (L eta, eta) >= 0 $
+
+тут вспоминаем школу и получаем:
+
+$ (L u_0 - f, eta) = 0 $
+
+второй сомножитель --- произвольная функция, значит $L u_0$ некуда деваться --- оно равно нулю.
+
+в дальнейшем будем работать с задачей (I):
+
+$ - (dif^2 u)/(dif x^2) + k u = f(x) wide x in [a, b] $
+
+$ u(a) = u(b) = 0 $
+
+задача (II) --- уравнение пуассона:
+
+$ laplace u = (diff^2 u) / (diff x^2) + (diff^2 u)/(diff y^2) = -f (x, y) wide (x, y) in Omega  $
+
+$ u |_Gamma = 0 $
+
+$ Omega = (a, b) times (c, d) $
+
+$ Omega = Omega + Gamma $
+
+введём ещё парочку пространств:
+
+$U_1$ --- функции с непрерывными производными до второго порядка включительно и с нулевыми граничными условиями: $u(a) = u(b) = 0$.
+
+$U_2$ --- функции с непрерывными производными до второго порядка включительно и $u|_Gamma = 0$.
+
+теперь обратимся к вариационным производным.
+
+$ J_1 (u) = integral_a^b (((diff u)/(diff x))^2 + k u^2 - alpha f u ) dif x $
+
+$ J_2 (u) = integral.double_Omega [((diff u)/(diff x))^2 + ((diff u)/(diff y))^2 - 2 f u] dif x dif y $
+
+пространство соболева:
+
+$ attach(W, t:0, tr: 1, br: 2) [a, b] $
+
+$ norm(u)_attach(W, br: 2, tr: 1, t: 0) = (integral_a^b [u^2 + ((diff u)/(diff x))^2] dif x)^(1/2) $
+
+$ norm(u)_(W_2^1 (Omega)) = (integral.double_Omega [u^2 + ((diff u)/(diff x))^2 + ((diff u)/(diff y))^2 dif x dif y])^(1/2) $
+
+$ J_1 (u) = min_(v in W_2^1 [a, b]) J_1 (v) $
+
+$ J_2 (u) = min_(v in W_2^1 (Omega)) J_2 (v) $
